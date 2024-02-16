@@ -6,14 +6,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/services/VueloService.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/views/VuelosView.php';
 
 // Pasajes
-include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/controller/PasajeroVueloController.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/services/PasajeroVueloService.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/views/PasajeVueloView.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/controller/PasajesController.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/services/PasajeService.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/views/PasajesView.php';
+
+// Pasajeros
+include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/services/PasajeroService.php';
 
 // Define la acción por defecto
-define('ACCION_DEFECTO', 'selectVuelos');
+define('ACCION_DEFECTO', 'viewVuelos');
 // Define el controlador por defecto
-define('CONTROLADOR_DEFECTO', 'PasajeroVuelo');
+define('CONTROLADOR_DEFECTO', 'Vuelos');
 
 // Comprueba la acción a realizar, que llegará en la petición.
 // Si no hay acción a realizar lanzará la acción por defecto, que es listar

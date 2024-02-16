@@ -3,10 +3,12 @@
 class VuelosController {
     private $service;
     private $view;
+    private $pasajeController;
     
     public function __construct() {
         $this->service = new VueloService();
         $this->view = new VuelosView();
+        $this->pasajeController = new PasajesController();
     }
     
     /**
@@ -18,23 +20,28 @@ class VuelosController {
         $this->view->getVuelos($vuelos);
     }
     
+    /**
+     * Mostrar información detallada de un vuelo
+     * 
+     * @param type $id
+     */
     public function viewVuelo($id) {
         $id = $_POST['vuelo'];
         $vuelo = $this->service->getOneVuelo($id);
+        
+        $this->view->oneVuelo($vuelo);
     }
     
-    /*public function selectVuelos() {
-        $id = $this->service->getIdentificador();
-        
-        $this->view->selectVuelo($id);
-    }*/
-    
-    public function revisarFuncion($id) {
-        if (isset($_POST['vuelo'])) {
-            $id = $_POST['idvuelo'];
-            $this->viewVuelo($id);
-        } else if (isset($_POST['pasajes'])) {
-            // Cargar el controlador del pasaje
-        }
+    /**
+     * Mostrar una información u otra dependiendo del botón pulsado
+     * 
+     * @param type $id
+     */
+    public function revisarFuncion() {
+        if (isset($_POST['vuelos'])) {
+            $this->viewVuelo($_POST['vuelo']);
+        } else if (isset($_POST['pasaje'])) {
+            $this->pasajeController->viewPasaje($_POST['vuelo']);
+        } 
     }
 }

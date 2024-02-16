@@ -4,24 +4,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Vuelos</a>
+                    <a class="nav-link" aria-current="page" href="index.php?controller=Vuelos&action=viewVuelos">Vuelos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Nuevo Pasaje</a>
+                    <a class="nav-link" href="index.php?controller=Pasajes&action=formInsert">Nuevo Pasaje</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pasajes</a>
-                </li>
-                <li class="nav-item">
-                    <?php
-                    include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/controller/PasajeroVueloController.php';
-                    include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/services/PasajeroVueloService.php';
-                    include $_SERVER['DOCUMENT_ROOT'] . '/Vuelos/views/PasajeVueloView.php';
-
-                    $vueloController = new PasajeroVueloController();
-
-                    $vueloController->selectVuelos();
-                    ?>
+                    <a class="nav-link" href="index.php?controller=Pasajes&action=viewPasajes">Pasajes</a>
                 </li>
             </ul>
         </div>

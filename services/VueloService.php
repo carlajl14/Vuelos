@@ -45,7 +45,7 @@ class VueloService {
         $res = curl_exec($conexion);
         if ($res) {
             return $res;
-        }
+        } 
         curl_close($conexion);
     }
 }
