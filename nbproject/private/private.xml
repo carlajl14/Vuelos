@@ -4,11 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/Vuelos/services/PasajeService.php</file>
-            <file>file:/C:/xampp/htdocs/Vuelos/frontcontroller.php</file>
             <file>file:/C:/xampp/htdocs/Vuelos/controller/PasajesController.php</file>
             <file>file:/C:/xampp/htdocs/Vuelos/index.php</file>
-            <file>file:/C:/xampp/htdocs/Vuelos/services/PasajeroService.php</file>
-            <file>file:/C:/xampp/htdocs/Vuelos/controller/VuelosController.php</file>
+            <file>file:/C:/xampp/htdocs/Vuelos/views/VuelosView.php</file>
+            <file>file:/C:/xampp/htdocs/Vuelos/css/style.css</file>
             <file>file:/C:/xampp/htdocs/Vuelos/views/PasajesView.php</file>
         </group>
     </open-files>

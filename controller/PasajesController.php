@@ -29,23 +29,25 @@ class PasajesController {
      * @param type $id
      */
     public function viewPasaje($id) {
+        $mensaje = "";
         $pasaje = $this->service->getPasaje($id);
 
-        $this->view->getPasajeVuelo($pasaje);
+        $this->view->getPasajeVuelo($pasaje, $mensaje);
     }
 
     /**
      * Función que muestra el fomulario para insertar un pasaje 
      */
     public function formInsert() {
-
+        $mensaje = "";
+        
         $pasajeros = $this->pasajeroService->getPasajeros();
         $vuelos = $this->vueloService->getVuelos();
 
         $pasajero = json_decode($pasajeros, true);
         $vuelo = json_decode($vuelos, true);
 
-        $this->view->formInsertPasaje($pasajero, $vuelo);
+        $this->view->formInsertPasaje($pasajero, $vuelo, $mensaje);
     }
 
     /**
@@ -65,14 +67,45 @@ class PasajesController {
             $clase = $_POST['clase'];
             $pvp = $_POST['pvp'];
 
-            //try {
-                $pasaje = $this->service->insertPasaje($pasajero, $vuelo, $asiento, $clase, $pvp);
-                return '<div class="alert alert-danger" role="alert">
-                        Pasaje insertado correctamente.
-                    </div>';
-            //} catch (Exception $ex) {
-                //return '<p>Error al insertar el pasaje. Comprueba los datos introducidos</p>';
-            //}
+            $pasaje = $this->service->insertPasaje($pasajero, $vuelo, $asiento, $clase, $pvp);
+            header("Location: index.php?controller=Pasajes&action=formInsert");
         }
+    }
+    
+    /**
+     * Función que muestra el fomulario para modificar un pasaje
+     */
+    public function formUpdate() {
+        $pasajeros = $this->pasajeroService->getPasajeros();
+        $vuelos = $this->vueloService->getVuelos();
+
+        $pasajero = json_decode($pasajeros, true);
+        $vuelo = json_decode($vuelos, true);
+        
+        $pasaje = $_POST['pasaje'];
+        
+        $this->view->formUpdatePasaje($pasajero, $vuelo, $pasaje);
+    }
+    
+    public function updatePasaje() {
+        if (isset($_POST['update'])) {
+            $pasajero = $_POST['pasajero'];
+            $vuelo = $_POST['vuelo'];
+            $asiento = $_POST['asiento'];
+            $clase = $_POST['clase'];
+            $pvp = $_POST['pvp'];
+            $pasaje = $_POST['pasaje'];
+            
+            $pasajes = $this->service->updatePasaje($pasajero, $vuelo, $asiento, $clase, $pvp, $pasaje);
+            
+            header("Location: index.php?controller=Pasajes&action=viewPasajes");
+        }
+    }
+    
+    public function deletePasaje() {
+        $id = $_POST['pasaje'];
+        
+        $delete = $this->service->deletePasaje($id);
+        header("Location: index.php?controller=Pasajes&action=viewPasajes");
     }
 }

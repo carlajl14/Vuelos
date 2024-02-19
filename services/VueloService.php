@@ -45,7 +45,11 @@ class VueloService {
         $res = curl_exec($conexion);
         if ($res) {
             return $res;
-        } 
+        } else {
+            return '<div class="alert alert-danger" role="alert">
+                        Este vuelo no tiene ningún pasaje.
+                    </div>';
+        }
         curl_close($conexion);
     }
 }
