@@ -17,11 +17,7 @@ class VuelosView {
         echo '<select class="form-select" style="width: 20%" name="vuelo">';
         echo '<option value="">Selecciona un vuelo</option>';
         foreach ($data as $vuelo) {
-            echo '<option value="'. $vuelo['identificador'] .'"';
-            /*if(isset($_POST['vuelo']) && isset($_POST['vuelo']) == $vuelo['identificador']) {
-                echo "selected='selected'";
-            } */
-            echo '>'. $vuelo['identificador'] .'</option>';
+            echo '<option value="'. $vuelo['identificador'] .'">'. $vuelo['identificador'] .'</option>';
         }
         echo '</select>';
         echo '<button class="btn btn-primary me-3 ms-3" type="submit" name="vuelos">Información Vuelo</button>';

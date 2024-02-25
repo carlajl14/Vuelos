@@ -74,25 +74,6 @@ class PasajeService {
         //para recibir una respuesta
         curl_setopt($conexion, CURLOPT_RETURNTRANSFER, true);
         $res = curl_exec($conexion);
-        
-        if (curl_errno($conexion)) {
-            throw new Exception('Error en la solicitud: ' . curl_error($conexion));
-        }
-
-        $httpCode = curl_getinfo($conexion, CURLINFO_HTTP_CODE);
-
-        if ($httpCode >= 400) {
-            // Parsear la respuesta JSON
-            $errorResponse = json_decode($res, true);
-
-            // Verificar si hay un error personalizado
-            if (isset($errorResponse['error'])) {
-                throw new Exception('Error de la API: ' . $errorResponse['error']);
-            } else {
-                throw new Exception('Error desconocido de la API');
-            }
-        }
-        
         if ($res) {
             return $res;
         }

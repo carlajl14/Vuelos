@@ -1,0 +1,45 @@
+.container__pasajes {
+    display: flex;
+    background-color: rgb(246, 248, 248);
+    border-radius: 10px;
+    box-shadow: 12px 9px 5px 0px rgba(184,170,184,1);
+    margin-bottom: 20px;
+    padding-left: 180px;
+}
+
+.container__pasajes:hover {
+    transform: scale(1.1);
+}
+
+.pasaje {
+    font-weight: 900;
+    margin-left: 30px;
+    margin-top: 15px;
+    color: rgb(43, 109, 136);
+}
+
+.pasajeros {
+    padding-top: 14px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.pasajero {
+    color: rgb(43, 109, 136);
+}
+
+.detalles {
+    padding-top: 14px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.clase {
+    margin-right: 20px;
+    color: rgb(43, 109, 136);
+}
+
+.precio, .asiento {
+    margin-left: 10px;
+    color: rgb(43, 109, 136);
+}

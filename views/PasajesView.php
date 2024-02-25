@@ -8,32 +8,25 @@ class PasajesView {
      * @param type $pasajes
      */
     public function getPasajes($pasajes) {
-        $data = json_decode($pasajes, true); //Obtiene los pasajes y los pasa de JSON a un array
+        $pas = json_decode($pasajes, true); //Obtiene los pasajes y los pasa de JSON a un array
         echo '<div class="contenedor">';
         echo '<div class="container">';
         echo "<h2 class='text-center pt-2'>Pasajes</h2>";
-        echo '<table class="table table-info mb-4 text-center">';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th scope="col">Idpasaje</th>';
-        echo '<th scope="col">Pasajero</th>';
-        echo '<th scope="col">Identificador</th>';
-        echo '<th scope="col">Número de asiento</th>';
-        echo '<th scope="col">Clase</th>';
-        echo '<th scope="col">Pvp</th>';
-        echo '<th scope="col">Modificar/Borrar</th>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
-        foreach ($data as $pasaje) {
-            echo '<tr>';
-            echo '<td>' . $pasaje['idpasaje'] . '</td>';
-            echo '<td>' . $pasaje['nombre'] . '</td>';
-            echo '<td>' . $pasaje['identificador'] . '</td>';
-            echo '<td>' . $pasaje['numasiento'] . '</td>';
-            echo '<td>' . $pasaje['clase'] . '</td>';
-            echo '<td>' . $pasaje['pvp'] . '</td>';
-            echo '<td class="d-flex justify-content-center">';
+        foreach ($pas as $pasaje) {
+            echo '<div class="container__pasajes">
+                        <p class="pasaje">'. $pasaje['idpasaje'] .'</p>
+                        <div class="pasajeros">
+                            <span class="pasajero">'. $pasaje['nombre'] .'</span>
+                        </div>
+                        <div class="vuelos">
+                            <span class="vuelo">Vuelo: '. $pasaje['identificador'] .'</span>
+                            <span class="asiento"><b>Asiento:</b> '. $pasaje['numasiento'] .'</span>
+                        </div>
+                        <div class="detalles">
+                            <span class="clase"><b>Clase:</b> '. $pasaje['clase'] .'</span>
+                            <span class="precio"><b>Pvp:</b> '. $pasaje['pvp'] .'</span>
+                        </div>';
+            echo '<div class="d-flex justify-content-center mt-2">';
             echo '<form method="POST" action="index.php?controller=Pasajes&action=formUpdate">';
             echo '<input name="pasaje" value=' . $pasaje['idpasaje'] . ' hidden />';
             echo '<button type="submit" class="btn btn-primary">Modificar</button>';
@@ -58,9 +51,9 @@ class PasajesView {
             echo '</div>';
             echo '</div>';
             echo '</div>';
+            echo '</div>';
             echo '</form>';
-            echo '</td>';
-            echo '</tr>';
+            echo '</div>';
         }
         echo '</tbody>';
         echo '</table>';
@@ -84,31 +77,23 @@ class PasajesView {
             $data = json_decode($pasajevuelo, true); //Obtiene los pasajes y los pasa de JSON a un array
             echo '<div class="contenedor">';
             echo '<div class="container">';
-            echo "<h2 class='text-center mt-2'>Pasajes</h2>";
-            echo '<table class="table table-info mb-4 text-center">';
-            echo '<thead>';
-            echo '<tr>';
-            echo '<th scope="col">Pasaje</th>';
-            echo '<th scope="col">Pasajero</th>';
-            echo '<th scope="col">Vuelo</th>';
-            echo '<th scope="col">Número de asiento</th>';
-            echo '<th scope="col">Clase</th>';
-            echo '<th scope="col">Pvp</th>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody>';
+            echo "<h2 class='text-center pt-2'>Pasajes</h2>";
             foreach ($data as $pasaje) {
-                echo '<tr>';
-                echo '<td>' . $pasaje['idpasaje'] . '</td>';
-                echo '<td>' . $pasaje['nombre'] . '</td>';
-                echo '<td>' . $pasaje['identificador'] . '</td>';
-                echo '<td>' . $pasaje['numasiento'] . '</td>';
-                echo '<td>' . $pasaje['clase'] . '</td>';
-                echo '<td>' . $pasaje['pvp'] . '</td>';
-                echo '</tr>';
+                echo '<div class="container__pasajes">
+                        <p class="pasaje">'. $pasaje['idpasaje'] .'</p>
+                        <div class="pasajeros">
+                            <span class="pasajero">'. $pasaje['nombre'] .'</span>
+                        </div>
+                        <div class="vuelos">
+                            <span class="vuelo">Vuelo: '. $pasaje['identificador'] .'</span>
+                            <span class="asiento">Asiento: '. $pasaje['numasiento'] .'</span>
+                        </div>
+                        <div class="detalles">
+                            <span class="clase">Clase: '. $pasaje['clase'] .'</span>
+                            <span class="precio">Pvp: '. $pasaje['pvp'] .'</span>
+                        </div>
+                    </div>';
             }
-            echo '</tbody>';
-            echo '</table>';
             echo '</div>';
             echo '<a class="btn btn-primary" style="margin-left: 120px" href="index.php?controller=Vuelos&action=viewVuelos">Volver</a>';
             echo '</div>';
@@ -123,28 +108,28 @@ class PasajesView {
         }
         echo '<div class="contenedor">';
         echo '<h2 class="text-center pt-2">Insertar Pasaje</h2>';
-        echo '<form method="POST" action="index.php?controller=Pasajes&action=insertPasaje">';
-        echo '<p>Selecciona pasajero</p>';
+        echo '<form method="POST" action="index.php?controller=Pasajes&action=insertPasaje" class="form text-white" style="width:700px; margin-left:430px">';
+        echo '<label>Selecciona pasajero</label>';
         echo '<select class="form-select" name="pasajero">';
         foreach ($pasajeros as $pasajero) {
             echo '<option value="' . $pasajero['pasajerocod'] . '">' . $pasajero['pasajerocod'] . ' - ' . $pasajero['nombre'] . '</option>';
         }
         echo '</select>';
-        echo '<p>Selecciona identificador de vuelo</p>';
+        echo '<label class="mt-3">Selecciona identificador de vuelo</label>';
         echo '<select class="form-select" name="vuelo">';
         foreach ($vuelos as $v) {
             echo '<option value="' . $v['identificador'] . '">' . $v['identificador'] . ' - ' . $v['aeropuertoorigen'] . ' - ' . $v['aeropuertodestino'] . '</option>';
         }
         echo '</select>';
-        echo '<p>Número de asiento</p>';
-        echo '<input name="asiento" type="number">';
-        echo '<p>Marca la clase</p>';
-        echo '<input name="clase" type="radio" value="TURISTA">TURISTA';
-        echo '<input name="clase" type="radio" value="PRIMERA">PRIMERA';
-        echo '<input name="clase" type="radio" value="BUSINESS">BUSINESS';
-        echo '<p>Pvp</p>';
-        echo '<input name="pvp" type="number"><br>';
-        echo '<button type="submit" class="btn btn-primary" name="insert">Insertar pasaje</button>';
+        echo '<label class="mt-3">Número de asiento:</label>';
+        echo '<input name="asiento" type="number" class="ms-2"><br>';
+        echo '<label class="mt-3">Marca la clase: </label>';
+        echo '<input name="clase" class="ms-2" type="radio" value="TURISTA">TURISTA';
+        echo '<input name="clase" class="ms-2" type="radio" value="PRIMERA">PRIMERA';
+        echo '<input name="clase" class="ms-2" type="radio" value="BUSINESS">BUSINESS<br>';
+        echo '<label class="mt-3">Pvp:</label>';
+        echo '<input name="pvp" class="ms-2" type="number"><br>';
+        echo '<button type="submit" class="btn btn-primary mt-3" name="insert">Insertar pasaje</button>';
         echo '</form>';
         echo '</div>';
     }
@@ -158,30 +143,30 @@ class PasajesView {
      */
     public function formUpdatePasaje($pasajeros, $vuelos, $pasaje) {
         echo '<div class="contenedor text-white">';
-        echo '<form method="POST" action="index.php?controller=Pasajes&action=updatePasaje">';
+        echo '<form method="POST" action="index.php?controller=Pasajes&action=updatePasaje" class="form text-white" style="width:700px; margin-left:430px">';
         echo '<input name="pasaje" value="' . $pasaje . '" type="number" hidden>';
         echo '<h2 class="text-center">Modificar pasaje ' . $pasaje . '</h2>';
-        echo '<p>Nombre del pasajero</p>';
+        echo '<label>Selecciona pasajero</label>';
         echo '<select class="form-select" name="pasajero">';
         foreach ($pasajeros as $pasajero) {
             echo '<option value="' . $pasajero['pasajerocod'] . '">' . $pasajero['pasajerocod'] . ' - ' . $pasajero['nombre'] . '</option>';
         }
         echo '</select>';
-        echo '<p>Identificador de vuelo</p>';
+        echo '<label class="mt-3">Selecciona identificador de vuelo</label>';
         echo '<select class="form-select" name="vuelo">';
         foreach ($vuelos as $v) {
             echo '<option value="' . $v['identificador'] . '">' . $v['identificador'] . ' - ' . $v['aeropuertoorigen'] . ' - ' . $v['aeropuertodestino'] . '</option>';
         }
         echo '</select>';
-        echo '<p>Número de asiento</p>';
-        echo '<input name="asiento" type="number">';
-        echo '<p>Marca la clase</p>';
-        echo '<input name="clase" type="radio" value="TURISTA">TURISTA';
-        echo '<input name="clase" type="radio" value="PRIMERA">PRIMERA';
-        echo '<input name="clase" type="radio" value="BUSINESS">BUSINESS';
-        echo '<p>Pvp</p>';
-        echo '<input name="pvp" type="number"><br>';
-        echo '<button type="submit" class="btn btn-primary" name="update">Modificar pasaje</button>';
+        echo '<label class="mt-3">Número de asiento:</label>';
+        echo '<input name="asiento" type="number" class="ms-2"><br>';
+        echo '<label class="mt-3">Marca la clase: </label>';
+        echo '<input name="clase" class="ms-2" type="radio" value="TURISTA">TURISTA';
+        echo '<input name="clase" class="ms-2" type="radio" value="PRIMERA">PRIMERA';
+        echo '<input name="clase" class="ms-2" type="radio" value="BUSINESS">BUSINESS<br>';
+        echo '<label class="mt-3">Pvp:</label>';
+        echo '<input name="pvp" class="ms-2" type="number"><br>';
+        echo '<button type="submit" class="btn btn-primary mt-3" name="update">Modificar pasaje</button>';
         echo '</form>';
         echo '</div>';
     }
