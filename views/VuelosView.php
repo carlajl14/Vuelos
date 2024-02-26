@@ -57,7 +57,7 @@ class VuelosView {
         $data = json_decode($vuelo, true); //Obtiene el vuelo y lo pasa de JSON a un array
         echo '<div class="contenedor">';
         echo '<div class="container">';
-        echo "<h2 class='text-center mt-2'>Vuelo</h2>";
+        echo "<h2 class='text-center pt-2'>Vuelo</h2>";
         echo '<div class="container__vuelos">
                     <p class="vuelo">'. $data['identificador'] .'</p>
                     <div class="origen">
